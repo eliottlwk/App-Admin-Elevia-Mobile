@@ -22,3 +22,11 @@ Développée en Flutter dans le cadre d'un cours de développement mobile.
 flutter pub get
 flutter run
 ```
+
+
+## Accès de démonstration
+
+| Champ | Valeur |
+|-------|--------|
+| Email | admin@elevia.app |
+| Mot de passe | elevia2026 |
