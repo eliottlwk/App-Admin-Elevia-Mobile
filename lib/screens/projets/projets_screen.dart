@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'projet_detail_screen.dart';
 
 class ProjetsScreen extends StatefulWidget {
   const ProjetsScreen({super.key});
@@ -96,18 +97,13 @@ class _ProjetsScreenState extends State<ProjetsScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Projets',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1A1A2E),
-                        ),
-                      ),
-                    ],
+                  const Text(
+                    'Projets',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1A1A2E),
+                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
@@ -186,100 +182,108 @@ class _ProjetsScreenState extends State<ProjetsScreen> {
                 itemCount: _filtered.length,
                 itemBuilder: (context, index) {
                   final projet = _filtered[index];
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(14),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.04),
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
+                  return GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ProjetDetailScreen(projet: projet),
+                      ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  projet['nom'],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15),
-                                ),
-                                const SizedBox(width: 8),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 2),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFF0EEFF),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Text(
-                                    projet['tag'],
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.04),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    projet['nom'],
                                     style: const TextStyle(
-                                        fontSize: 10,
-                                        color: Color(0xFF6C63FF)),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 2),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFF0EEFF),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Text(
+                                      projet['tag'],
+                                      style: const TextStyle(
+                                          fontSize: 10,
+                                          color: Color(0xFF6C63FF)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                projet['montant'],
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 14),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            projet['client'],
+                            style: const TextStyle(
+                                color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '${projet['tachesFaites']}/${projet['taches']} tâches',
+                                style: const TextStyle(
+                                    color: Colors.grey, fontSize: 12),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 3),
+                                decoration: BoxDecoration(
+                                  color: _statutColor(projet['statut'])
+                                      .withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  projet['statut'],
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: _statutColor(projet['statut']),
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                              ],
-                            ),
-                            Text(
-                              projet['montant'],
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 14),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          projet['client'],
-                          style: const TextStyle(
-                              color: Colors.grey, fontSize: 12),
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '${projet['tachesFaites']}/${projet['taches']} tâches',
-                              style: const TextStyle(
-                                  color: Colors.grey, fontSize: 12),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 3),
-                              decoration: BoxDecoration(
-                                color: _statutColor(projet['statut'])
-                                    .withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Text(
-                                projet['statut'],
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: _statutColor(projet['statut']),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        LinearProgressIndicator(
-                          value: projet['progress'],
-                          backgroundColor: const Color(0xFFEEEEEE),
-                          color: const Color(0xFF6C63FF),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ],
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          LinearProgressIndicator(
+                            value: projet['progress'],
+                            backgroundColor: const Color(0xFFEEEEEE),
+                            color: const Color(0xFF6C63FF),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
