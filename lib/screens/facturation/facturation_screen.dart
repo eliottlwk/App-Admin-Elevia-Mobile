@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'facture_detail_screen.dart';
 
 class FacturationScreen extends StatefulWidget {
   const FacturationScreen({super.key});
@@ -93,70 +94,81 @@ class _FacturationScreenState extends State<FacturationScreen>
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
-        return Container(
-          margin: const EdgeInsets.only(bottom: 10),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(14),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.04),
-                blurRadius: 6,
-                offset: const Offset(0, 2),
+        return GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => FactureDetailScreen(
+                facture: item,
+                isDevis: items == _devis,
               ),
-            ],
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item['client'],
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 15),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    item['ref'],
-                    style: const TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
-                  Text(
-                    item['date'],
-                    style: const TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    item['montant'],
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 15),
-                  ),
-                  const SizedBox(height: 4),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: _statutColor(item['statut']).withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(20),
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(14),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.04),
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item['client'],
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 15),
                     ),
-                    child: Text(
-                      item['statut'],
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: _statutColor(item['statut']),
-                        fontWeight: FontWeight.w600,
+                    const SizedBox(height: 2),
+                    Text(
+                      item['ref'],
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
+                    ),
+                    Text(
+                      item['date'],
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      item['montant'],
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                    const SizedBox(height: 4),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: _statutColor(item['statut']).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        item['statut'],
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: _statutColor(item['statut']),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
