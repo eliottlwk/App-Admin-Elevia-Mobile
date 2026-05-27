@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'screens/splash_screen.dart';
+import 'screens/login_screen.dart';
 import 'screens/dashboard/dashboard_screen.dart';
 import 'screens/crm/crm_screen.dart';
 import 'screens/facturation/facturation_screen.dart';
@@ -23,7 +25,12 @@ class EleviaAdminApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MainNavigation(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const MainNavigation(),
+      },
     );
   }
 }
@@ -39,12 +46,12 @@ class _MainNavigationState extends State<MainNavigation> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-  const DashboardScreen(),
-  const ProjetsScreen(),
-  const CrmScreen(),
-  const FacturationScreen(),
-  const TachesScreen(),
-];
+    const DashboardScreen(),
+    const ProjetsScreen(),
+    const CrmScreen(),
+    const FacturationScreen(),
+    const TachesScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
