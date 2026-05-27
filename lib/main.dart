@@ -3,6 +3,7 @@ import 'screens/dashboard/dashboard_screen.dart';
 import 'screens/crm/crm_screen.dart';
 import 'screens/facturation/facturation_screen.dart';
 import 'screens/taches/taches_screen.dart';
+import 'screens/projets/projets_screen.dart';
 
 void main() {
   runApp(const EleviaAdminApp());
@@ -38,11 +39,12 @@ class _MainNavigationState extends State<MainNavigation> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    const DashboardScreen(),
-    const CrmScreen(),
-    const FacturationScreen(),
-    const TachesScreen(),
-  ];
+  const DashboardScreen(),
+  const ProjetsScreen(),
+  const CrmScreen(),
+  const FacturationScreen(),
+  const TachesScreen(),
+];
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,10 @@ class _MainNavigationState extends State<MainNavigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.dashboard),
             label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.folder),
+            label: 'Projets',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
