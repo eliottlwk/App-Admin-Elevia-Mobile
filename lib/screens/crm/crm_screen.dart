@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'client_detail_screen.dart';
 
 class CrmScreen extends StatefulWidget {
   const CrmScreen({super.key});
@@ -155,84 +156,92 @@ class _CrmScreenState extends State<CrmScreen> {
                 itemCount: _filtered.length,
                 itemBuilder: (context, index) {
                   final client = _filtered[index];
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(14),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.04),
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
+                  return GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ClientDetailScreen(client: client),
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: client['color'],
-                          child: Text(
-                            client['initiales'],
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold),
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.04),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: client['color'],
+                            child: Text(
+                              client['initiales'],
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  client['nom'],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w600, fontSize: 14),
+                                ),
+                                Text(
+                                  client['email'],
+                                  style: const TextStyle(
+                                      color: Colors.grey, fontSize: 12),
+                                ),
+                                Text(
+                                  client['telephone'],
+                                  style: const TextStyle(
+                                      color: Colors.grey, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(
-                                client['nom'],
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 14),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 3),
+                                decoration: BoxDecoration(
+                                  color: _statutColor(client['statut'])
+                                      .withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  client['statut'],
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: _statutColor(client['statut']),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ),
+                              const SizedBox(height: 4),
                               Text(
-                                client['email'],
+                                '${client['projets']} projet(s)',
                                 style: const TextStyle(
-                                    color: Colors.grey, fontSize: 12),
-                              ),
-                              Text(
-                                client['telephone'],
-                                style: const TextStyle(
-                                    color: Colors.grey, fontSize: 12),
+                                    color: Colors.grey, fontSize: 11),
                               ),
                             ],
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 3),
-                              decoration: BoxDecoration(
-                                color: _statutColor(client['statut'])
-                                    .withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Text(
-                                client['statut'],
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: _statutColor(client['statut']),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              '${client['projets']} projet(s)',
-                              style: const TextStyle(
-                                  color: Colors.grey, fontSize: 11),
-                            ),
-                          ],
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
