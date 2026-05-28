@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'add_tache_screen.dart';
 
 class TachesScreen extends StatefulWidget {
   const TachesScreen({super.key});
@@ -132,16 +133,23 @@ class _TachesScreenState extends State<TachesScreen> {
                       color: Color(0xFF1A1A2E),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF6C63FF),
-                      borderRadius: BorderRadius.circular(20),
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const AddTacheScreen()),
                     ),
-                    child: const Text(
-                      '+ Tâche',
-                      style: TextStyle(color: Colors.white, fontSize: 13),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF6C63FF),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Text(
+                        '+ Tâche',
+                        style: TextStyle(color: Colors.white, fontSize: 13),
+                      ),
                     ),
                   ),
                 ],
