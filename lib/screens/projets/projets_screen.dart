@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'projet_detail_screen.dart';
+import 'add_projet_screen.dart';
 
 class ProjetsScreen extends StatefulWidget {
   const ProjetsScreen({super.key});
@@ -70,6 +71,12 @@ class _ProjetsScreenState extends State<ProjetsScreen> {
       ? _projets
       : _projets.where((p) => p['statut'] == _filtre).toList();
 
+  void _ajouterProjet(Map<String, dynamic> projet) {
+    setState(() {
+      _projets.add(projet);
+    });
+  }
+
   Color _statutColor(String statut) {
     switch (statut) {
       case 'En cours':
@@ -105,16 +112,25 @@ class _ProjetsScreenState extends State<ProjetsScreen> {
                       color: Color(0xFF1A1A2E),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF6C63FF),
-                      borderRadius: BorderRadius.circular(20),
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            AddProjetScreen(onAjouter: _ajouterProjet),
+                      ),
                     ),
-                    child: const Text(
-                      '+ Projet',
-                      style: TextStyle(color: Colors.white, fontSize: 13),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF6C63FF),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Text(
+                        '+ Projet',
+                        style: TextStyle(color: Colors.white, fontSize: 13),
+                      ),
                     ),
                   ),
                 ],
