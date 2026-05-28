@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'client_detail_screen.dart';
+import 'add_client_screen.dart';
 
 class CrmScreen extends StatefulWidget {
   const CrmScreen({super.key});
@@ -101,16 +102,23 @@ class _CrmScreenState extends State<CrmScreen> {
                       color: Color(0xFF1A1A2E),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF6C63FF),
-                      borderRadius: BorderRadius.circular(20),
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const AddClientScreen()),
                     ),
-                    child: const Text(
-                      '+ Client',
-                      style: TextStyle(color: Colors.white, fontSize: 13),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF6C63FF),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Text(
+                        '+ Client',
+                        style: TextStyle(color: Colors.white, fontSize: 13),
+                      ),
                     ),
                   ),
                 ],
@@ -197,7 +205,8 @@ class _CrmScreenState extends State<CrmScreen> {
                                 Text(
                                   client['nom'],
                                   style: const TextStyle(
-                                      fontWeight: FontWeight.w600, fontSize: 14),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14),
                                 ),
                                 Text(
                                   client['email'],
